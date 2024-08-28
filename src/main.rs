@@ -66,7 +66,6 @@ fn main() {
 
     let index_template = IndexTemplate {
         stylesheet: resource_url("assets/dictionary.css"),
-        polyfill_js: resource_url("assets/polyfill.js"),
         dictionary_js: resource_url("assets/dictionary.js"),
         words_output,
     };

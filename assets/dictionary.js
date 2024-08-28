@@ -15,16 +15,6 @@ function getQuery() {
 function notFound() {
   const dictionary = document.querySelector("#dictionary");
   dictionary.classList.remove('hide');
-  setFrameHeight();
-}
-
-function setFrameHeight() {
-  // reset to small
-  window.frameElement.style.height = "20px";
-  // resize to actual
-  window.frameElement.style.height =
-    //document.getElementById("dictionary").scrollHeight + "px";
-    document.body.scrollHeight + "px";
 }
 
 function parseResponse(text) {
@@ -41,18 +31,18 @@ function parseResponse(text) {
 
   let xmlDoc = document.createElement("div");
   text.split("\n").forEach(function (line) {
-    var type = typeOfLine(line);
-    var el = document.createElement("span");
+    const type = typeOfLine(line);
+    const el = document.createElement("span");
     el.innerHTML = line;
     el.setAttribute("type", type);
     xmlDoc.appendChild(el);
   });
 
   // rebuild into a tree
-  var root = document.getElementsByTagName("ul")[0];
-  for (i = xmlDoc.childElementCount; i > 0; i--) {
-    el = xmlDoc.children[i - 1];
-    type = el.getAttribute("type", "unknown");
+  const root = document.getElementsByTagName("ul")[0];
+  for (let i = xmlDoc.childElementCount; i > 0; i--) {
+    const el = xmlDoc.children[i - 1];
+    const type = el.getAttribute("type", "unknown");
     if (type === "english") {
       var english = el.innerText;
     } else if (type === "lemma") {
@@ -77,8 +67,6 @@ function parseResponse(text) {
       root.insertBefore(item, root.firstChild);
     }
   }
-
-  setFrameHeight();
 }
 
 function typeOfLine(line) {
@@ -466,8 +454,8 @@ function parseCode(full, text) {
   el.classList.add("code");
   el.innerText = text;
   el.appendChild(tooltip);
-  el.setAttribute("onmouseover", "setFrameHeight(); setTooltipPos(this)");
-  el.setAttribute("onmouseout", "resetTooltipStyles(this); setFrameHeight()");
+  el.setAttribute("onmouseover", "setTooltipPos(this)");
+  el.setAttribute("onmouseout", "resetTooltipStyles(this)");
 
   return " " + el.outerHTML;
 }
