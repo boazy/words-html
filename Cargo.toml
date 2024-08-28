@@ -1,0 +1,11 @@
+[package]
+name = "words-html"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+directories = "5.0.1"
+askama = "0.12.1"
+clap = { version = "4.5.16", features = ["derive"] }
+tap = "1.0.1"
+url = "2.5.2"
