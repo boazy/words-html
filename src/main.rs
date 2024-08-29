@@ -2,6 +2,7 @@ use std::{env, process};
 use std::path::PathBuf;
 use askama::Template;
 use clap::Parser;
+use deunicode::deunicode;
 use url::Url;
 use crate::resources::{rebuild_cache, resource_url};
 use crate::utils::StringExt;
@@ -51,7 +52,12 @@ fn main() {
     if args.english_to_latin {
         word_args.push("~E".to_string());
     }
-    word_args.extend(args.words);
+
+    let query_words = args.words.iter()
+        .map(|word| deunicode(word))
+        .collect::<Vec<String>>();
+
+    word_args.extend(query_words);
 
     let output = process::Command::new(&words_exe)
         .current_dir(&words_dir)

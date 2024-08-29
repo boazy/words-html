@@ -1,17 +1,3 @@
-function getQuery() {
-  const re = /\?word=(.*?)(&|$)/;
-  const text = window.parent.window.location.search;
-  if (text.length === 0) return "";
-  let query = decodeURIComponent(text);
-  query = re.exec(query)[1];
-  query = query.trim().toLowerCase();
-  query = query.normalize("NFD");
-  query = query.replace(/[\u0300-\u036f]/g, "");
-  query = query.replace("æ", "ae");
-  query = query.replace("œ", "oe");
-  return query;
-}
-
 function notFound() {
   const dictionary = document.querySelector("#dictionary");
   dictionary.classList.remove('hide');
